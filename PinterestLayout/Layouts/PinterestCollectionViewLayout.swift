@@ -35,7 +35,8 @@ class PinterestCollectionViewLayout: UICollectionViewLayout {
             // Column can only equate to 0 or 1 lets us know should it be on the left or the right of the screen
             let column = item % itemsPerRow
             let itemSize: CGSize = CGSize(width: UIScreen.main.bounds.width / 3, height: 150)
-            let xOffset: CGFloat = 16
+            let totalWidth = (2 * itemSize.width) + spacing
+            let xOffset: CGFloat = (contentWidth - totalWidth) / 2
             let xPosition = CGFloat(column) * (itemSize.width + spacing) + xOffset
             let yPosition = yOffsets[column] // Used to track the y position for each item in the corresponding 0 or 1 column
             
@@ -46,33 +47,6 @@ class PinterestCollectionViewLayout: UICollectionViewLayout {
 
             yOffsets[column] = yOffsets[column] + itemSize.height + spacing
             contentHeight = max(frame.maxY, contentHeight) // In case the newest item added is smaller than the previous item don't want the content height to be represantive being smaller than it is
-//
-//
-//            
-//            let frame: CGRect
-//            if let previousCellFrame = previousCellFrame {
-//                
-//                // If the size of the item plus the spacing expands pass the mid point of the screen layout items on next line
-//                let useNewLineOffset: Bool = (previousCellFrame.maxX + spacing) > UIScreen.main.bounds.width / 2
-//                let xOffset = useNewLineOffset ? xOffset : (previousCellFrame.maxX + spacing)
-//                let yOffset = useNewLineOffset ? previousCellFrame.maxY + spacing : previousCellFrame.minY
-//                
-//                frame = CGRect(
-//                    x: xOffset,
-//                    y: yOffset,
-//                    width: itemSize.width,
-//                    height: itemSize.height
-//                )
-//            } else {
-//                // Meaning we are at the first item
-//                frame = CGRect(x: xOffset, y: contentHeight + spacing, width: itemSize.width, height: itemSize.height)
-//            }
-//            
-//            attributes.frame = frame
-//            cache.append(attributes)
-//            
-//            contentHeight = frame.maxY
-//            previousCellFrame = frame
         }
     }
     
