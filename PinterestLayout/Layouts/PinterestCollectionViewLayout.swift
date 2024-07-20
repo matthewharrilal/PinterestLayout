@@ -12,6 +12,7 @@ class PinterestCollectionViewLayout: UICollectionViewLayout {
     
     private var cache: [UICollectionViewLayoutAttributes] = []
     private var contentHeight: CGFloat = 0
+    private let arraySizes: [CGFloat] = [75, 100, 240, 300, 150]
 
     private var contentWidth: CGFloat {
         guard let collectionView = collectionView else { return 0 }
@@ -34,7 +35,7 @@ class PinterestCollectionViewLayout: UICollectionViewLayout {
             
             // Column can only equate to 0 or 1 lets us know should it be on the left or the right of the screen
             let column = item % itemsPerRow
-            let itemSize: CGSize = CGSize(width: UIScreen.main.bounds.width / 3, height: 150)
+            let itemSize: CGSize = CGSize(width: UIScreen.main.bounds.width / 3, height: arraySizes.randomElement() ?? 75)
             let totalWidth = (2 * itemSize.width) + spacing
             let xOffset: CGFloat = (contentWidth - totalWidth) / 2
             let xPosition = CGFloat(column) * (itemSize.width + spacing) + xOffset
@@ -43,7 +44,6 @@ class PinterestCollectionViewLayout: UICollectionViewLayout {
             let frame = CGRect(x: xPosition, y: yPosition, width: itemSize.width, height: itemSize.height)
             attributes.frame = frame
             cache.append(attributes)
-            
 
             yOffsets[column] = yOffsets[column] + itemSize.height + spacing
             contentHeight = max(frame.maxY, contentHeight) // In case the newest item added is smaller than the previous item don't want the content height to be represantive being smaller than it is
