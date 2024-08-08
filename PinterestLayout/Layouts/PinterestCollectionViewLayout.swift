@@ -12,7 +12,7 @@ class PinterestCollectionViewLayout: UICollectionViewLayout {
     
     private var cache: [UICollectionViewLayoutAttributes] = []
     private var contentHeight: CGFloat = 0
-    private let arraySizes: [CGFloat] = [75, 100, 240, 300, 150]
+    private let arraySizes: [CGFloat] = [75, 100, 240, 300, 150, 77, 88, 99]
 
     private var contentWidth: CGFloat {
         guard let collectionView = collectionView else { return 0 }
@@ -35,7 +35,7 @@ class PinterestCollectionViewLayout: UICollectionViewLayout {
             
             // Column can only equate to 0 or 1 lets us know should it be on the left or the right of the screen
             let column = item % itemsPerRow
-            let itemSize: CGSize = CGSize(width: UIScreen.main.bounds.width / 3, height: arraySizes.randomElement() ?? 75)
+            let itemSize: CGSize = CGSize(width: UIScreen.main.bounds.width / 3, height: arraySizes.randomElement() ?? 27)
             let totalWidth = (2 * itemSize.width) + spacing
             let xOffset: CGFloat = (contentWidth - totalWidth) / 2
             let xPosition = CGFloat(column) * (itemSize.width + spacing) + xOffset
